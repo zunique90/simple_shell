@@ -30,9 +30,11 @@ int cq_exec(char **argv, char *buffer, char *fullpathbuffer)
 		}
 	}
 	wait(&status);
-
 	if (WIFEXITED(status))
 		exitstat = WEXITSTATUS(status);
-
+	for (i = 0; argv[i]; i++)
+		free(argv[i]);
+	free(argv);
+	free(buffer);
 	return (exitstat);
 }
